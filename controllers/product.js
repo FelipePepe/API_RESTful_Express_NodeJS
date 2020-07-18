@@ -10,13 +10,13 @@ function getProduct(req, res) {
   });
 }
 
-function getProducts(req, res) {
+const getProducts = (req, res) => {
   Product.find({}, (err, products) => {
     if (err) res.status(500).send(`Error: ${err}`);
     if (!products) res.status(404).send("Product can not find");
     res.status(200).send({ products });
   });
-}
+};
 
 function updateProduct(req, res) {
   let productId = req.params.productId;
