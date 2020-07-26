@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon --trace-deprecation index.js"
   },
   "author": "Felipe Pérez",
   "license": "MIT",
@@ -15,9 +15,12 @@
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "helmet-csp": "^2.10.0",
     "jwt-simple": "^0.5.6",
     "moment": "^2.27.0",
-    "mongoose": "^5.9.24"
+    "mongoose": "^5.9.25",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

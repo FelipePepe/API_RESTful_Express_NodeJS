@@ -12,4 +12,5 @@ module.exports = {
     process.env.passdb +
     "@cluster0.p2tmu.mongodb.net/test",
   secretJWT: process.env.secretJWT,
+  AUTHORITY: process.env.AUTHORITY,
 };

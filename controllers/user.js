@@ -6,25 +6,31 @@ const service = require("../services");
 const signUp = (req, res) => {
   let user = new User();
 
-  user.email = req.body.email;
-  user.displayName = req.body.displayName;
+  if (req.body && req.body.email && req.body.email.length > 0) {
+    user.email = req.body.email;
+    user.displayName = req.body.displayName;
 
-  user.save((err) => {
-    if (err) res.status(500).send({ message: `Error: ${err}` });
+    user.save((err) => {
+      if (err) res.status(500).send({ message: `Error: ${err}` });
 
-    return res.status(200).send({ token: service.createToken(user) });
-  });
+      return res.status(200).send({ token: service.createToken(user) });
+    });
+  } else {
+    res.status(500).send({ message: "Empty data" });
+  }
 };
 
 const signIn = (req, res) => {
   User.find({ email: req.body.email }, (err, user) => {
-    if (err) res.status(500).send({ message: `Error: ${err}` });
-    if (!user) res.status(404).send({ message: "Error: user not exists" });
+    if (err) return res.status(500).send({ message: `Error: ${err}` });
+    if (!user || user.length === 0) {
+      return res.status(404).send({ message: "Error: user not exists" });
+    }
 
-    req.user = user;
+    req.user = user[0];
     res.status(200).send({
       message: "signIn OK",
-      token: service.createToken(user),
+      token: service.createToken(user[0]),
     });
   });
 };
