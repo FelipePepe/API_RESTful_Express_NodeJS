@@ -21,7 +21,9 @@ const signUp = (req, res) => {
 };
 
 const signIn = (req, res) => {
-  User.find({ email: req.body.email }, (err, user) => {
+  const email = req.body.email;
+
+  User.find({ email }, (err, user) => {
     if (err) return res.status(500).send({ message: `Error: ${err}` });
     if (!user || user.length === 0) {
       return res.status(404).send({ message: "Error: user not exists" });

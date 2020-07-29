@@ -18,7 +18,7 @@ const getProducts = (req, res) => {
   });
 };
 
-function updateProduct(req, res) {
+const updateProduct = (req, res) => {
   let productId = req.params.productId;
   let update = req.body;
 
@@ -29,9 +29,9 @@ function updateProduct(req, res) {
 
     res.status(200).send({ message: `Product updated: ${productUpdated}` });
   });
-}
+};
 
-function deleteProduct(req, res) {
+const deleteProduct = (req, res) => {
   Product.findById(req.params.productId, (err, product) => {
     if (err) res.status(500).send(`Error: ${err}`);
     if (product) {
@@ -41,9 +41,9 @@ function deleteProduct(req, res) {
       });
     }
   });
-}
+};
 
-function insertProduct(req, res) {
+const insertProduct = (req, res) => {
   console.log("POST /api/product/");
 
   let product = new Product();
@@ -60,7 +60,7 @@ function insertProduct(req, res) {
 
     res.status(200).send({ message: productStored });
   });
-}
+};
 
 module.exports = {
   insertProduct,
